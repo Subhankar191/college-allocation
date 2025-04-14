@@ -1,0 +1,39 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Login Page</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <link rel="stylesheet" href="{% static 'colleges/signup.css' %}">
+    <link href="https://fonts.googleapis.com/css2?family=Magnolia+Script&display=swap" rel="stylesheet">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+<body>
+    <header>
+        <div class="container_header">
+          <img src="{% static 'colleges/logo.jpg' %}" alt="College Mantra Logo" class="logo">
+          <h1>COLLEGE <span>MANTRA</span></h1>
+        </div>
+      </header>  
+    <div class="background">
+        <div class="shape"></div>
+        <div class="shape"></div>
+    </div>
+    {% if error %}
+    <div class="message error">{{ error }}</div>
+{% endif %}
+<form method="post" action="{% url 'colleges:college_login' %}">
+    {% csrf_token %}
+        <h3>Login Here</h3>
+        <label for="username">College ID</label>
+        <input type="text" placeholder="Enter your College ID" id="username" name="username" required>
+
+        <label for="password">Password</label>
+        <input type="password" placeholder="Enter yourPassword" id="password" name="password" required>
+
+        <button type="submit">Log In</button>
+
+        <a href="{% url 'colleges:college_signup' %}" >Create an account</a>
+    </form>
+</body>
+</html>

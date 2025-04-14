@@ -1,0 +1,16 @@
+{% extends 'users/base.html' %}
+
+{% load static %}
+
+{% block title %}Home Page{% endblock %}
+
+{% block content %}
+<!-- Specific Styles for Home Page -->
+<link rel="stylesheet" href="{% static 'users/home.css' %}">
+<section class="section">
+    <div class="container">
+      <h2>Welcome to College Mantra 2024</h2>
+      <p>Join the seat allocation process for IITs, NITs, and other top engineering institutes in India. Get all the latest updates and expert advice to make informed decisions for your college admissions.</p>
+    </div>
+</section>
+{% endblock %}

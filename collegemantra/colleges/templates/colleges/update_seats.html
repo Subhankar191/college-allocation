@@ -1,0 +1,214 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Update Seats</title>
+    <link rel="stylesheet" href="{% static 'css/common.css' %}"> 
+    <style>
+        /* General Styles */
+body {
+    font-family: 'Arial', sans-serif;
+    background-color: #E6F7FF; /* Light blue background */
+    color: #333; /* Dark text for readability */
+    margin: 0;
+    padding: 0;
+}
+
+/* Container Styles */
+.container {
+    max-width: 1250px;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: #fff; /* White background for contrast */
+    border-radius: 8px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+}
+
+/* Heading Styles */
+h1 {
+    font-size: 2.5em;
+    color: #4CAF50; /* Green for emphasis */
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+/* Messages */
+ul.messages {
+    list-style: none;
+    padding: 0;
+    margin: 10px 0;
+}
+
+ul.messages li {
+    padding: 10px;
+    margin-bottom: 10px;
+    border-radius: 5px;
+    font-size: 1.1em;
+}
+
+ul.messages li.success {
+    background-color: #d4edda;
+    color: #155724;
+}
+
+ul.messages li.error {
+    background-color: #f8d7da;
+    color: #721c24;
+}
+
+/* Form Styles */
+form {
+    margin-top: 20px;
+}
+
+/* Table Styles */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+    text-align: left;
+    font-size: 14px;
+    border: 2px solid #ddd;
+}
+
+thead th {
+    background-color: #00BAFF;
+    color: white;
+    padding: 10px;
+    text-transform: uppercase;
+    border: 1px solid #ddd;
+}
+
+tbody tr {
+    background-color: #f9f9f9;
+    border: 1px solid #ddd;
+}
+
+tbody tr:nth-child(even) {
+    background-color: #eeeeee;
+}
+
+td {
+    padding: 8px 10px;
+    border: 1px solid #ddd;
+}
+
+tbody tr td[colspan="9"] {
+    text-align: center;
+    font-style: italic;
+    color: #666;
+}
+
+tbody tr:hover {
+    background-color: #d3e8ff;
+}
+
+/* Input Fields */
+input[type="number"] {
+    width: 100px;
+    padding: 8px;
+    margin: 5px 0;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    font-size: 14px;
+}
+
+input[type="number"]:focus {
+    border-color: #00BAFF;
+    outline: none;
+}
+
+/* Button Styles */
+button[type="submit"] {
+    background-color: #2563EB;
+    display:flex;
+    justify-content: center;
+    color: #fff;
+    padding: 12px 24px;
+    border-radius: 5px;
+    border: none;
+    cursor: pointer;
+    font-size: 16px;
+    margin-top: 20px;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+button[type="submit"]:hover {
+    background-color: #CB9DF0;
+    transform: scale(1.05);
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    h1 {
+        font-size: 2em;
+    }
+
+    table, th, td {
+        font-size: 12px;
+    }
+
+    .container {
+        padding: 10px;
+    }
+
+    button[type="submit"] {
+        width: 100%;
+    }
+}
+
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Update Seat Matrix</h1>
+        
+        {% if messages %}
+            <ul class="messages">
+                {% for message in messages %}
+                    <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+                {% endfor %}
+            </ul>
+        {% endif %}
+
+        <form method="POST">
+            {% csrf_token %}
+            <table>
+                <thead>
+                    <tr>
+                        <th>Course</th>
+                        <th>General</th>
+                        <th>General PwD</th>
+                        <th>OBC NCL</th>
+                        <th>OBC NCL PwD</th>
+                        <th>SC</th>
+                        <th>SC PwD</th>
+                        <th>ST</th>
+                        <th>ST PwD</th>
+                        <th>Total Seats</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for course in courses %}
+                    <tr>
+                        <td>{{ course.1 }}</td>
+                        <td><input type="number" name="general_{{ course.0 }}" value="{{ course.2 }}"></td>
+                        <td><input type="number" name="general_pwd_{{ course.0 }}" value="{{ course.3 }}"></td>
+                        <td><input type="number" name="obc_{{ course.0 }}" value="{{ course.4 }}"></td>
+                        <td><input type="number" name="obc_pwd_{{ course.0 }}" value="{{ course.5 }}"></td>
+                        <td><input type="number" name="sc_{{ course.0 }}" value="{{ course.6 }}"></td>
+                        <td><input type="number" name="sc_pwd_{{ course.0 }}" value="{{ course.7 }}"></td>
+                        <td><input type="number" name="st_{{ course.0 }}" value="{{ course.8 }}"></td>
+                        <td><input type="number" name="st_pwd_{{ course.0 }}" value="{{ course.9 }}"></td>
+                        <td><input type="number" name="total_{{ course.0 }}" value="{{ course.10 }}"></td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+            <button type="submit">Update Seats</button>
+        </form>
+    </div>
+</body>
+</html> 

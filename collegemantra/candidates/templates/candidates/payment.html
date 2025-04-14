@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Make Payment</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background-color: #f9f9f9;
+        }
+        .container {
+            text-align: center;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+            background-color: white;
+        }
+        h1 {
+            color: #00baff;
+        }
+        #pay-button {
+            background-color: #4CAF50;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+        #pay-button:hover {
+            background-color: #45a049;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Make Payment</h1>
+        <p>Amount: ₹1</p>
+        <form action="{% url 'candidates:process_payment' %}" method="POST">
+            {% csrf_token %}
+            <input type="hidden" name="amount" value="1">
+            <button id="pay-button" type="submit">Pay ₹1</button>
+        </form>
+    </div>
+</body>
+</html>
