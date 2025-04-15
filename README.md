@@ -14,7 +14,7 @@ A web-based College Allocation System that streamlines and automates the college
 
 - **Frontend:** HTML, CSS, JavaScript
 - **Backend:** Django (Python)
-- **Database:** SQLite3 (default Django DB)
+- **Database:** MySQL
 - **Version Control:** Git & GitHub
 
 ## 📸 Screenshots
