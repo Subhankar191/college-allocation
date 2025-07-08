@@ -1,0 +1,22 @@
+{% extends 'users/base.html' %}
+
+{% load static %}
+
+{% block title %}Home Page{% endblock %}
+
+{% block content %}
+<!-- Specific Styles for Home Page -->
+<link rel="stylesheet" href="{% static 'users/home.css' %}">
+<section class="section">
+  <div class="container">
+    <h2>Important Dates</h2>
+    <ul class="dates-list">
+      <li><strong>June 15, 2024:</strong> Start of Registration</li>
+      <li><strong>July 10, 2024:</strong> First Round Seat Allocation Results</li>
+      <li><strong>July 25, 2024:</strong> Last Date for Round 1 Admission</li>
+      <li><strong>August 5, 2024:</strong> Second Round Seat Allocation Results</li>
+    </ul>
+  </div>
+</section>
+
+{% endblock %}

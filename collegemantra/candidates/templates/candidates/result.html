@@ -1,259 +1,126 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Allocation Result</title>
-    {% load static %}
-    <link rel="stylesheet" href="{% static 'css/result.css' %}"> <!-- Link to external CSS -->
-    <style>
-        /* Base Styling */
-body {
-    font-family: Arial, sans-serif;
-    background-color: #f4f7fa;
-    margin: 0;
-    padding: 0;
-}
+{% extends 'candidates/base.html' %}
+{% load static %}
 
-/* Container */
-.container {
-    width: 80%;
-    max-width: 1000px;
-    margin: 50px auto;
-    background-color: #ffffff;
-    padding: 20px;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-    border-radius: 8px;
-}
+{% block title %}Allocation Result{% endblock %}
 
-/* Header Styling */
-header {
-    text-align: center;
-    margin-bottom: 30px;
-}
-
-h1 {
-    font-size: 28px;
-    color: #333;
-    margin-bottom: 10px;
-}
-
-/* Student Info Section */
-.student-info {
-    margin-bottom: 30px;
-}
-
-.student-info h2 {
-    font-size: 22px;
-    color:  #6e399c;
-    margin-bottom: 10px;
-}
-
-.student-info p {
-    font-size: 16px;
-    color: #555;
-}
-
-/* Allocation Result Table */
-.allocation-result {
-    margin-bottom: 30px;
-}
-
-.allocation-result h2 {
-    font-size: 22px;
-    color:  #6e399c;
-    margin-bottom: 10px;
-}
-
-.allocation-result table {
-    width: 100%;
-    border-collapse: collapse;
-    margin-top: 10px;
-}
-
-.allocation-result th, .allocation-result td {
-    padding: 12px 15px;
-    text-align: left;
-    border: 1px solid #ddd;
-}
-
-.allocation-result th {
-    background-color:  #00BAFF;
-    color: white;
-    font-size: 16px;
-}
-
-.allocation-result td {
-    background-color: #f9f9f9;
-    font-size: 14px;
-}
-
-.allocation-result tr:nth-child(even) td {
-    background-color: #f1f1f1;
-}
-
-.allocation-result tr:hover td {
-    background-color: #eaeaea;
-}
-
-/* Status Message */
-.status-message {
-    text-align: center;
-}
-
-.success {
-    color: green;
-    font-size: 18px;
-    font-weight: bold;
-}
-
-.error {
-    color: red;
-    font-size: 18px;
-    font-weight: bold;
-}
-
-.status-message p {
-    margin: 10px 0;
-    font-size: 16px;
-}
-
-/* Responsive Design */
-
-/* Mobile Phones (up to 480px) */
-@media (max-width: 480px) {
-    .container {
-        width: 95%;
-        padding: 15px;
+{% block content %}
+<style>
+    /* Scoped styles that won't affect base.html elements */
+    .allocation-result-container {
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        background-color: #f4f6f9;
+        padding: 20px;
     }
 
-    h1 {
-        font-size: 20px;
+    .allocation-result-box {
+        background: #ffffff;
+        border-radius: 12px;
+        max-width: 900px;
+        margin: 20px auto;
+        padding: 30px;
+        box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
     }
 
-    .student-info h2, .allocation-result h2 {
-        font-size: 18px;
-    }
-
-    .student-info p {
-        font-size: 14px;
-    }
-
-    .allocation-result th, .allocation-result td {
-        font-size: 12px;
-        padding: 10px;
-    }
-
-    .status-message p {
-        font-size: 14px;
-    }
-}
-
-/* Tablets (481px to 768px) */
-@media (min-width: 481px) and (max-width: 768px) {
-    .container {
-        width: 90%;
-    }
-
-    h1 {
-        font-size: 24px;
-    }
-
-    .student-info h2, .allocation-result h2 {
-        font-size: 20px;
-    }
-
-    .student-info p {
-        font-size: 15px;
-    }
-
-    .allocation-result th, .allocation-result td {
-        font-size: 14px;
-        padding: 10px;
-    }
-
-    .status-message p {
-        font-size: 15px;
-    }
-}
-
-/* Laptops (769px to 1024px) */
-@media (min-width: 769px) and (max-width: 1024px) {
-    .container {
-        width: 85%;
-    }
-
-    h1 {
-        font-size: 26px;
-    }
-
-    .student-info h2, .allocation-result h2 {
-        font-size: 22px;
-    }
-
-    .student-info p {
-        font-size: 16px;
-    }
-
-    .allocation-result th, .allocation-result td {
-        font-size: 15px;
-        padding: 12px;
-    }
-
-    .status-message p {
-        font-size: 16px;
-    }
-}
-
-/* Desktops (1025px and above) */
-@media (min-width: 1025px) {
-    .container {
-        width: 70%;
-        padding: 25px;
-    }
-
-    h1 {
+    .allocation-main-heading {
+        text-align: center;
+        color: #2c3e50;
+        margin-bottom: 30px;
         font-size: 28px;
+        font-weight: 600;
+        padding-bottom: 15px;
+        border-bottom: 2px solid #3498db;
     }
 
-    .student-info h2, .allocation-result h2 {
-        font-size: 24px;
+    .allocation-student-info, 
+    .allocation-details, 
+    .allocation-status {
+        margin: 25px 0;
     }
 
-    .student-info p {
+    .allocation-section-heading {
+        color: #2c3e50;
+        font-size: 22px;
+        margin-bottom: 15px;
+        padding-left: 10px;
+        border-left: 4px solid #3498db;
+    }
+
+    .allocation-data-table {
+        width: 100%;
+        border-collapse: collapse;
+        margin-top: 15px;
+    }
+
+    .allocation-data-table th, 
+    .allocation-data-table td {
+        padding: 12px 15px;
+        text-align: left;
+        border: 1px solid #ddd;
+    }
+
+    .allocation-data-table th {
+        background-color: #3498db;
+        color: white;
+    }
+
+    .allocation-data-table td {
+        background-color: #f9f9f9;
+    }
+
+    .allocation-success {
+        color: #28a745;
+        font-weight: bold;
+        text-align: center;
         font-size: 18px;
+        padding: 10px;
+        background-color: #e8f5e9;
+        border-radius: 5px;
     }
 
-    .allocation-result th, .allocation-result td {
+    .allocation-error {
+        color: #dc3545;
+        font-weight: bold;
+        text-align: center;
+        font-size: 18px;
+        padding: 10px;
+        background-color: #f8d7da;
+        border-radius: 5px;
+    }
+
+    .allocation-student-details {
         font-size: 16px;
-        padding: 14px;
+        line-height: 1.6;
     }
 
-    .status-message p {
-        font-size: 18px;
+    .allocation-student-details strong {
+        color: #2c3e50;
+        min-width: 100px;
+        display: inline-block;
     }
-}
+</style>
 
-    </style>
-</head>
-<body>
-
-    <div class="container">
-        <header>
-            <h1>College Allocation Result</h1>
-        </header>
+<div class="allocation-result-container">
+    <div class="allocation-result-box">
+        <!-- Main Heading -->
+        <h1 class="allocation-main-heading">College Allocation Result</h1>
         
         <!-- Student's Information -->
-        <div class="student-info">
-            <h2>Student Details</h2>
-            <p><strong>Name:</strong> {{ candidate_name }}</p>
-            <p><strong>Roll No:</strong> {{ allocation.roll_no }}</p>
+        <div class="allocation-student-info">
+            <h2 class="allocation-section-heading">Student Details</h2>
+            {% if candidate_name and allocation %}
+                <div class="allocation-student-details">
+                    <p><strong>Name:</strong> {{ candidate_name }}</p>
+                    <p><strong>Roll No:</strong> {{ allocation.roll_no }}</p>
+                </div>
+            {% else %}
+                <p>No candidate information available.</p>
+            {% endif %}
         </div>
 
         <!-- College Allocation Result -->
-        <div class="allocation-result">
-            <h2>Allocated College and Course</h2>
-            <table>
+        <div class="allocation-details">
+            <h2 class="allocation-section-heading">Allocated College and Course</h2>
+            <table class="allocation-data-table">
                 <thead>
                     <tr>
                         <th>Choice No.</th>
@@ -282,15 +149,13 @@ h1 {
         </div>
 
         <!-- Allocation Status Message -->
-        <div class="status-message">
+        <div class="allocation-status">
             {% if allocation_status %}
-                <p class="success">{{ allocation_status }}</p>
+                <p class="allocation-success">{{ allocation_status }}</p>
             {% else %}
-                <p class="error">Your allocation is not successful. Please contact the administration.</p>
+                <p class="allocation-error">Your allocation is not successful. Please contact the administration.</p>
             {% endif %}
         </div>
-
     </div>
-
-</body>
-</html>
+</div>
+{% endblock %}

@@ -1,227 +1,167 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>College Courses</title>
-    <style>
-        /* Base styling */
-/* Base styling */
-body {
-    font-family: 'Arial', sans-serif;
+{% extends 'candidates/base.html' %}
+{% load static %}
+
+{% block title %}Preference List{% endblock %}
+
+{% block content %}
+<style>
+  body {
     background-color: #f4f7fa;
-    color: #333;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    min-height: 100vh;
-    margin: 0;
-}
+  }
 
-.container {
-    width: 95%;
+  .container {
+    width: 90%;
     max-width: 1200px;
+    margin: 30px auto;
     background-color: #ffffff;
-    color: #333;
     padding: 20px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
     border-radius: 8px;
-    box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1);
-    margin: 20px;
-    overflow: hidden;
-}
+  }
 
-/* Header styling */
-h1 {
-    font-size: 24px;
+  h1, h2 {
     text-align: center;
     color: #0073e6;
     margin-bottom: 20px;
-    border-bottom: 2px solid #0073e6;
-    padding-bottom: 10px;
-}
+  }
 
-/* Table styling */
-table {
+  table {
     width: 100%;
     border-collapse: collapse;
-    margin-top: 20px;
-}
+    margin-top: 10px;
+  }
 
-thead {
-    background-color: #0073e6;
-    color: #ffffff;
-}
-
-th, td {
-    padding: 12px 15px;
+  th, td {
+    padding: 12px;
+    border: 1px solid #ccc;
     text-align: left;
-    border: 1px solid #ddd;
-}
+  }
 
-th {
-    font-size: 1.1em;
-}
+  thead {
+    background-color: #00baff;
+    color: white;
+  }
 
-td {
-    font-size: 1em;
-}
-
-tbody tr:nth-child(even) {
+  tbody tr:nth-child(even) {
     background-color: #f9f9f9;
-}
+  }
 
-tbody tr:hover {
+  tbody tr:hover {
     background-color: #f1f1f1;
-}
+  }
 
-/* Button styling */
-button {
-    background-color: #2563eb;
+  button {
+    background-color: #6e399c;
     color: #ffffff;
     border: none;
-    padding: 8px 12px;
+    padding: 6px 12px;
     border-radius: 4px;
     font-size: 14px;
     cursor: pointer;
     transition: background-color 0.3s ease;
-    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
-}
+  }
 
-button a {
+  button a {
     color: #ffffff;
     text-decoration: none;
-}
+  }
 
-button:hover {
-    background-color: #005bb5;
-    box-shadow: 0px 6px 8px rgba(0, 0, 0, 0.2);
-}
+  button:hover {
+    background-color: #cb9df0;
+  }
 
-/* Responsive Design */
+  .submit-container {
+    display: flex;
+    justify-content: center;
+    margin-top: 30px;
+  }
 
-/* Mobile Phones (up to 480px) */
-@media (max-width: 480px) {
-    .container {
-        width: 95%;
-        padding: 15px;
-    }
+  .submit-container button {
+    background-color: #2563eb;
+  }
 
-    h1 {
-        font-size: 20px;
-    }
-
+  @media (max-width: 768px) {
     th, td {
-        font-size: 12px;
-        padding: 8px;
+      font-size: 12px;
+      padding: 10px;
     }
 
     button {
-        padding: 6px 10px;
-        font-size: 12px;
+      font-size: 12px;
     }
-}
+  }
+</style>
 
-/* Tablets (481px to 768px) */
-@media (min-width: 481px) and (max-width: 768px) {
-    .container {
-        width: 90%;
-    }
+<div class="container">
+  <h1>Welcome, {{ user.username }}</h1>
 
-    h1 {
-        font-size: 22px;
-    }
+  <!-- Available Courses -->
+  <h2>Available Courses</h2>
+  <table>
+    <thead>
+      <tr>
+        <th>College Name</th>
+        <th>Course Name</th>
+        <th>College ID</th>
+        <th>Course ID</th>
+        <th>Action</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for college_course in college_courses %}
+      <tr>
+        <td>{{ college_course.0 }}</td>
+        <td>{{ college_course.1 }}</td>
+        <td>{{ college_course.2 }}</td>
+        <td>{{ college_course.3 }}</td>
+        <td>
+          <button>
+            <a href="{% url 'candidates:add_preference' college_course.2 college_course.3 %}">Add</a>
+          </button>
+        </td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
 
-    th, td {
-        font-size: 14px;
-        padding: 10px;
-    }
+  <!-- Added Preferences -->
+  <h2>Your Preference List</h2>
+  <table>
+    <thead>
+      <tr>
+        <th>College Name</th>
+        <th>Course Name</th>
+        <th>College ID</th>
+        <th>Course ID</th>
+        <th>Action</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for preference in preferences %}
+      <tr>
+        <td>{{ preference.1 }}</td>
+        <td>{{ preference.3 }}</td>
+        <td>{{ preference.0 }}</td>
+        <td>{{ preference.2 }}</td>
+        <td>
+          <button>
+            <a href="{% url 'candidates:remove_preference' preference.0 preference.2 %}">Remove</a>
+          </button>
+        </td>
+      </tr>
+      {% empty %}
+      <tr>
+        <td colspan="5" style="text-align: center;">No preferences added yet.</td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
 
-    button {
-        padding: 7px 12px;
-        font-size: 13px;
-    }
-}
-
-/* Laptops (769px to 1024px) */
-@media (min-width: 769px) and (max-width: 1024px) {
-    .container {
-        width: 85%;
-    }
-
-    h1 {
-        font-size: 24px;
-    }
-
-    th, td {
-        font-size: 15px;
-    }
-
-    button {
-        padding: 8px 14px;
-    }
-}
-
-/* Desktops (1025px and above) */
-@media (min-width: 1025px) {
-    .container {
-        width: 70%;
-        padding: 25px;
-    }
-
-    h1 {
-        font-size: 26px;
-    }
-
-    th, td {
-        font-size: 16px;
-    }
-
-    button {
-        padding: 10px 16px;
-        font-size: 14px;
-    }
-}
-
-    </style>
-</head>
-<body>
-    <div class="container">
-        <h1>Welcome, {{ user.username }} !</h1>
-
-        <!-- Tables container for side-by-side display -->
-        <div class="tables-container">
-            
-            <!-- Table for available courses -->
-            <div class="table">
-                <h2>Available Courses</h2>
-                <table>
-                    <thead>
-                        <tr>
-                            <th>College Name</th>
-                            <th>Course Name</th>
-                            <th>College ID</th>
-                            <th>Course ID</th>
-                            <th>Action</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {% for college_course in college_courses %}
-                            <tr>
-                                <td>{{ college_course.0 }}</td>  <!-- College name -->
-                                <td>{{ college_course.1 }}</td>  <!-- Course name -->
-                                <td>{{ college_course.2 }}</td>  <!-- College ID -->
-                                <td>{{ college_course.3 }}</td>  <!-- Course ID -->
-                                <td>
-                                    <button><a href="{% url 'remove_preference' college_course.0 college_course.2 %}">Remove</a></button>
-                                </td>
-                            </tr>
-                        {% endfor %}
-                    </tbody>
-                </table>
-            </div>            
-        </div>
-    </div>
-    
-    
-</body>
-</html>
+  <!-- Submit Preferences Button -->
+  <div class="submit-container">
+    <button>
+      <a href="{% url 'candidates:candidate_home' %}">Submit Preferences</a>
+    </button>
+  </div>
+</div>
+{% endblock %}

@@ -1,0 +1,17 @@
+{% extends 'users/base.html' %}
+
+{% load static %}
+
+{% block title %}Home Page{% endblock %}
+
+{% block content %}
+<!-- Specific Styles for Home Page -->
+<link rel="stylesheet" href="{% static 'users/home.css' %}">
+<section class="section">
+    <div class="container">
+      <h2>Contact Us</h2>
+      <p>If you have any questions regarding COLLEGE MANTRA 2024, feel free to reach out to us via email or phone.</p>
+      <p>Email: abc@gmail.com</p>
+    </div>
+</section>
+{% endblock %}

@@ -1,0 +1,134 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>College Register</title>
+    <link rel="stylesheet" href="{% static 'colleges/style.css' %}">
+    <style>
+        /* Apply gradient to the whole page */
+        html, body {
+            height: 100%;
+            margin: 0;
+            padding: 0;
+            background: linear-gradient(to bottom, #E6F7FF, #99E6FF, #00D1FF); /* Smooth uniform gradient */
+            background-size: cover;
+            font-size: 16px;
+            font-family: 'Arial', sans-serif;
+            color: #333;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        /* Form container styles */
+        .form-container {
+            width: 100%;
+            max-width: 600px;
+            padding: 20px;
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            /* Border styles for top and bottom */
+            border-top: 3px solid #3B1E54;
+            border-bottom: 3px solid #3B1E54;
+            box-sizing: border-box;
+        
+        }
+
+        .form-container h2 {
+            text-align: center;
+            font-size: 1.5em;
+            color: #3B1E54;
+            margin-bottom: 0px;
+            font-family: 'Georgia', serif;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 0px;
+            font-weight: bold;
+        }
+
+        input, select {
+            width: 100%;
+            padding: 10px;
+            margin-top: 8px;
+            margin-bottom: 0px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-size: 0.8em;
+        }
+
+        select {
+            background-color: #f9f9f9;
+        
+        }
+
+        button {
+            width: 100%;
+            padding: 12px;
+            background-color: #2563EB;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            font-size: 1em;
+            cursor: pointer;
+            transition: background-color 0.3s ease, transform 0.3s ease;
+        }
+
+        button:hover {
+            background-color: #CB9DF0;
+            transform: scale(1.05); /* Hover effect */
+        }
+
+        /* Adjust the form for smaller screen sizes */
+        @media (max-width: 768px) {
+            .form-container {
+                padding: 15px;
+                max-width: 90%;
+            }
+
+            .form-container h2 {
+                font-size: 1.8em;
+            }
+
+            input, select, button {
+                font-size: 1em;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="form-container">
+        <h2>Register College Information</h2>
+        <form method="POST" action="{% url 'colleges:college_register' %}">
+            {% csrf_token %}
+            <label for="college_name">College Name</label>
+            <input type="text" id="college_name" name="college_name" required>
+
+            <label for="college_type">College Type</label>
+            <select name="college_type" id="college_type" required>
+                <option value="" disabled selected>College Type</option>
+                <option value="Private">Private</option>
+                <option value="Public">Public</option>
+            </select>
+
+            <label for="contact_no">Contact Number</label>
+            <input type="text" id="contact_no" name="contact_no" required>
+
+            <label for="website">Website</label>
+            <input type="text" id="website" name="website" required>
+
+            <label for="location">College Location</label>
+            <input type="text" id="location" name="location" required>
+
+            <label for="email">Email</label>
+            <input type="email" id="email" name="email" required>
+
+            <button type="submit">Submit</button>
+        </form>
+    </div>
+</body>
+</html>

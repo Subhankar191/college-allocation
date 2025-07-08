@@ -1,0 +1,49 @@
+/* Buttons and Sections */
+.login-signup-section .container {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    flex-wrap: wrap;
+    padding: 30px;
+    gap: 20px;
+    /* background-image: linear-gradient(#E6F7FF,#99E6FF,#00D1FF); */
+}
+
+.action-item {
+    text-align: center;
+    width: 220px;
+}
+
+.action-item p {
+    font-size: 1.2rem;
+    margin-bottom: 10px;
+    color: #490b7c;
+}
+
+.btn {
+    display: inline-block;
+    /* background: linear-gradient(to bottom right, #60A5FA, #22D3EE, #2DD4BF); */
+    background: linear-gradient(to right, #FB923C, #EC4899, #9333EA);
+    /* background: linear-gradient(to bottom, #FFE4E6, #CCFBF1); */
+    color: white;
+    padding: 15px 30px;
+    border-radius: 50px;
+    text-decoration: none;
+    text-align: center;
+    font-size: 1.1rem;
+    font-weight: bold;
+    width: 100%;
+    max-width: 200px;
+    transition: all 0.3s ease-in-out;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+.btn:hover {
+    background: linear-gradient(to right, #8e24aa, #3e94ea);
+    transform: translateY(-3px);
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2);
+}
+
+.btn:active {
+    transform: translateY(0);
+}

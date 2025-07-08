@@ -1,52 +1,212 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Make Payment</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-            margin: 0;
-            background-color: #f9f9f9;
-        }
-        .container {
-            text-align: center;
-            padding: 30px;
-            border-radius: 10px;
-            box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
-            background-color: white;
-        }
-        h1 {
-            color: #00baff;
-        }
-        #pay-button {
-            background-color: #4CAF50;
-            color: white;
-            padding: 10px 20px;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-            font-size: 16px;
-        }
-        #pay-button:hover {
-            background-color: #45a049;
-        }
-    </style>
-</head>
-<body>
-    <div class="container">
-        <h1>Make Payment</h1>
-        <p>Amount: ₹1</p>
-        <form action="{% url 'candidates:process_payment' %}" method="POST">
-            {% csrf_token %}
-            <input type="hidden" name="amount" value="1">
-            <button id="pay-button" type="submit">Pay ₹1</button>
-        </form>
+{% extends 'candidates/base.html' %}
+{% load static %}
+
+{% block title %}Payment Confirmation{% endblock %}
+
+{% block content %}
+<style>
+    .payment-confirmation-container {
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        background-color: #f5f7fa;
+        min-height: calc(100vh - 120px);
+        padding: 30px 0;
+    }
+    .payment-confirmation-box {
+        text-align: center;
+        padding: 40px;
+        border-radius: 12px;
+        box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1);
+        background-color: white;
+        max-width: 500px;
+        width: 90%;
+        margin: 0 auto;
+    }
+    .payment-main-heading {
+        color: #2c3e50;
+        margin-bottom: 25px;
+        font-size: 28px;
+        font-weight: 600;
+        padding-bottom: 15px;
+        border-bottom: 2px solid #3498db;
+    }
+    .payment-allocation-details {
+        background-color: #f8f9fa;
+        padding: 20px;
+        border-radius: 8px;
+        margin: 25px 0;
+        text-align: left;
+    }
+    .payment-detail-row {
+        display: flex;
+        margin-bottom: 12px;
+    }
+    .payment-detail-label {
+        font-weight: 600;
+        min-width: 120px;
+        color: #495057;
+    }
+    .payment-button {
+        background-color: #28a745;
+        color: white;
+        padding: 12px 25px;
+        border: none;
+        border-radius: 6px;
+        cursor: pointer;
+        font-size: 16px;
+        font-weight: 600;
+        transition: all 0.3s;
+        margin-top: 20px;
+        width: 100%;
+    }
+    .payment-button:hover {
+        background-color: #218838;
+        transform: translateY(-2px);
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    }
+    .payment-options-section {
+        margin-top: 25px;
+        text-align: left;
+    }
+    .payment-method-option {
+        margin: 12px 0;
+        padding: 10px;
+        border-radius: 6px;
+        background-color: #f8f9fa;
+    }
+    .payment-status-badge {
+        display: inline-block;
+        padding: 5px 12px;
+        border-radius: 12px;
+        font-size: 14px;
+        font-weight: 600;
+    }
+    .payment-status-unpaid {
+        background-color: #ffc107;
+        color: #212529;
+    }
+    .payment-status-paid {
+        background-color: #28a745;
+        color: white;
+    }
+    .payment-error-message {
+        color: #dc3545;
+        margin: 20px 0;
+        padding: 15px;
+        background-color: #f8d7da;
+        border-radius: 6px;
+    }
+    .payment-success-message {
+        color: #28a745;
+        margin: 25px 0;
+        padding: 15px;
+        background-color: #e8f5e9;
+        border-radius: 6px;
+    }
+    .payment-success-message strong {
+        color: #2c3e50;
+    }
+    .payment-download-link {
+        display: inline-block;
+        background-color: #28a745;
+        color: white;
+        padding: 12px 25px;
+        border-radius: 6px;
+        font-weight: 600;
+        margin-top: 15px;
+        transition: all 0.3s;
+    }
+    .payment-download-link:hover {
+        background-color: #218838;
+        text-decoration: none;
+        transform: translateY(-2px);
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    }
+    .payment-preference-link {
+        display: inline-block;
+        margin-top: 15px;
+        font-weight: 600;
+    }
+</style>
+
+<div class="payment-confirmation-container">
+    <div class="payment-confirmation-box">
+        <h1 class="payment-main-heading">Payment Confirmation</h1>
+
+        {% if allocation %}
+            <div class="payment-allocation-details">
+                <!-- Student Information -->
+                <div class="payment-detail-row">
+                    <span class="payment-detail-label">Student Name:</span>
+                    <span>{{ allocation.candidate_name }}</span>
+                </div>
+                <div class="payment-detail-row">
+                    <span class="payment-detail-label">Roll Number:</span>
+                    <span>{{ allocation.roll_no }}</span>
+                </div>
+    
+                <!-- Allocation Details -->
+                <div class="payment-detail-row">
+                    <span class="payment-detail-label">College:</span>
+                    <span>{{ allocation.college_name }}</span>
+                </div>
+                <div class="payment-detail-row">
+                    <span class="payment-detail-label">Course:</span>
+                    <span>{{ allocation.course_name }} ({{ allocation.program_name }})</span>
+                </div>
+                <div class="payment-detail-row">
+                    <span class="payment-detail-label">Choice No:</span>
+                    <span>{{ allocation.choice_no }}</span>
+                </div>
+                <div class="payment-detail-row">
+                    <span class="payment-detail-label">Status:</span>
+                    <span class="payment-status-badge {% if allocation.payment_status %}payment-status-paid{% else %}payment-status-unpaid{% endif %}">
+                        {% if allocation.payment_status %}Paid{% else %}Payment Pending{% endif %}
+                    </span>
+                </div>
+            </div>
+
+            {% if not allocation.payment_status %}
+            <!-- Payment form -->
+            <form method="POST" action="{% url 'candidates:process_payment' %}">
+                {% csrf_token %}
+                <input type="hidden" name="amount" value="1">
+                <input type="hidden" name="allocation_id" value="{{ allocation.allocation_id }}">
+
+                <div class="payment-options-section">
+                    <h3>Payment Method</h3>
+                    <div class="payment-method-option">
+                        <input type="radio" id="upi" name="payment_method" value="upi" checked>
+                        <label for="upi">UPI Payment</label>
+                    </div>
+                    <div class="payment-method-option">
+                        <input type="radio" id="card" name="payment_method" value="card">
+                        <label for="card">Credit/Debit Card</label>
+                    </div>
+                    <div class="payment-method-option">
+                        <input type="radio" id="netbanking" name="payment_method" value="netbanking">
+                        <label for="netbanking">Net Banking</label>
+                    </div>
+                </div>
+
+                <button class="payment-button" type="submit">Confirm Payment - ₹1</button>
+            </form>
+
+            {% else %}
+            <!-- Payment success message and offer letter -->
+            <div class="payment-success-message">
+                <p>Your payment has been successfully processed!</p>
+                <p>Your seat at <strong>{{ allocation.college_name }}</strong> is now confirmed.</p>
+                <a href="{% url 'candidates:download_offer_letter' %}" class="payment-download-link">Download Offer Letter</a>
+            </div>
+            {% endif %}
+
+        {% else %}
+            <div class="payment-error-message">
+                <p>No allocation found. Please complete your preferences first.</p>
+                <a href="{% url 'candidates:college_course_view' %}" class="payment-preference-link">Go to Preferences</a>
+            </div>
+        {% endif %}
     </div>
-</body>
-</html>
+</div>
+
+{% endblock %}

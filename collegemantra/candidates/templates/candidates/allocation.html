@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+
+{% block title %}Your Allocation{% endblock %}
+
+{% block content %}
+<div class="container" style="margin-top: 30px;">
+  {% if has_allocation %}
+    <h2>Your Allocation</h2>
+    <p><strong>College:</strong> {{ allocation.1 }}</p>
+    <p><strong>Course:</strong> {{ allocation.2 }}</p>
+    <p><strong>Choice Number:</strong> {{ allocation.3 }}</p>
+
+    {% if not allocation.4 %}
+      <div class="alert alert-warning">
+        <strong>Status:</strong> Your allocation is <u>pending payment confirmation</u>.
+        <br><br>
+        <a href="{% url 'candidates:payment_page' %}" class="btn btn-primary">Proceed to Payment</a>
+      </div>
+    {% else %}
+      <div class="alert alert-success">
+        ✅ Your seat has been confirmed successfully.
+      </div>
+    {% endif %}
+    
+  {% else %}
+    <div class="alert alert-info">
+      No allocation found. Please update your preferences and check again later.
+      <br><br>
+      <a href="{% url 'candidates:college_course_view' %}" class="btn btn-info">Update Preferences</a>
+    </div>
+  {% endif %}
+</div>
+{% endblock %}

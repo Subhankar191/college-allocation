@@ -1,28 +1,32 @@
 {% extends 'candidates/base.html' %}
-
 {% load static %}
 
-{% block title %}Candidate Home Page{% endblock %}
+{% block title %}Candidate Dashboard{% endblock %}
 
 {% block content %}
-<!-- Specific Styles for Home Page -->
+<!-- Home Page Specific Styles -->
 <link rel="stylesheet" href="{% static 'candidates/home.css' %}">
-    <main class="section">
-        <section class="welcome-section">
-            <h1>Welcome, {{ request.user.username }}</h1>
-            <p>Welcome to the student dashboard. Manage your information, register for events, and more.</p>
-        </section>  
-      <section>
-        <a href="{% url 'candidates:candidate_register'  %}" class="btn">Register Details</a>
-      </section>
-      <section>
-        <a href="{% url 'candidates:college_course_view' %}" class="btn">Update Preferences</a>
-      </section>
-      <section>
-        <a href="{% url 'candidates:get_candidate_allocation' %}" class="btn">Check Result</a>
-      </section>
-      <section>
-        <a href="{% url 'candidates:payment' %}" class="btn">Payment</a>
-      </section>
-    </main>
-    {% endblock %}
+
+<main class="section">
+  <section class="welcome-section">
+    <h1>Welcome, {{ request.user.username }}</h1>
+    <p>This is your dashboard. You can register your details, manage preferences, check your result, and proceed with payment.</p>
+  </section>
+
+  <section>
+    <a href="{% url 'candidates:candidate_register' %}" class="btn">Register Details</a>
+  </section>
+
+  <section>
+    <a href="{% url 'candidates:college_course_view' %}" class="btn">Update Preferences</a>
+  </section>
+
+  <section>
+    <a href="{% url 'candidates:get_candidate_allocation' %}" class="btn">Check Result</a>
+  </section>
+
+  <section>
+    <a href="{% url 'candidates:payment_page' %}" class="btn">Make Payment</a>
+  </section>
+</main>
+{% endblock %}

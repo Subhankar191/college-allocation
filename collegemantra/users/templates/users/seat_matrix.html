@@ -20,12 +20,16 @@
             <th>College Name</th>
             <th>Branch Name</th>
             <th>Program Name</th>
+            <th>General</th>
+            <th>General (PwD)</th>
+            <th>OBC-NCL</th>
+            <th>OBC-NCL (PwD)</th>
+            <th>SC</th>
+            <th>SC (PwD)</th>
+            <th>ST</th>
+            <th>ST (PwD)</th>
             <th>Total Seats</th>
             <th>Allocated Seats</th>
-            <th>General Seats</th>
-            <th>OBC-NCL Seats</th>
-            <th>SC Seats</th>
-            <th>ST Seats</th>
           </tr>
         </thead>
         <tbody>
@@ -34,12 +38,16 @@
             <td>{{ course.college_name }}</td>
             <td>{{ course.branch_name }}</td>
             <td>{{ course.program_name }}</td>
+            <td>{{ course.general }}</td>
+            <td>{{ course.general_pwd }}</td>
+            <td>{{ course.obc_ncl }}</td>
+            <td>{{ course.obc_ncl_pwd }}</td>
+            <td>{{ course.sc }}</td>
+            <td>{{ course.sc_pwd }}</td>
+            <td>{{ course.st }}</td>
+            <td>{{ course.st_pwd }}</td>
             <td>{{ course.total_seats }}</td>
             <td>{{ course.allocated_seats }}</td>
-            <td>{{ course.general }}</td>
-            <td>{{ course.obc_ncl }}</td>
-            <td>{{ course.sc }}</td>
-            <td>{{ course.st }}</td>
           </tr>
           {% empty %}
           <tr>

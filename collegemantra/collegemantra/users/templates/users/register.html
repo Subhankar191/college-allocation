@@ -1,0 +1,31 @@
+{% extends 'users/base.html' %}
+
+{% load static %}
+
+{% block title %}Home Page{% endblock %}
+
+{% block content %}
+<!-- Specific Styles for Home Page -->
+<link rel="stylesheet" href="{% static 'users/register.css' %}">
+<!-- Login/Signup Section -->
+<section class="login-signup-section">
+    <div class="container">
+        <div class="action-item">
+            <p>Candidate Login</p>
+            <a href="{% url 'candidates:candidate_login' %}" class="btn">Login</a>
+        </div>
+        <div class="action-item">
+            <p>Candidate Signup</p>
+            <a href="{% url 'candidates:candidate_signup' %}" class="btn">Sign Up</a>
+        </div>
+        <div class="action-item">
+            <p>College Login</p>
+            <a href="{% url 'colleges:college_login' %}" class="btn">Login</a>
+        </div>
+        <div class="action-item">
+            <p>College Signup</p>
+            <a href="{% url 'colleges:college_signup' %}" class="btn">Sign Up</a>
+        </div>
+    </div>
+</section>
+{% endblock %}

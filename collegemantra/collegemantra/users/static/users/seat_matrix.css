@@ -1,0 +1,88 @@
+/* Section Styles */
+.section {
+    padding: 60px 20px;
+    text-align: center;
+    background-image: linear-gradient(#E6F7FF, #99E6FF, #00D1FF);
+    opacity: 1; /* Ensures full opacity */
+    transition: all 0.3s ease;
+}
+
+.section h2 {
+    font-size: 2.8em;
+    margin-bottom: 25px;
+    color: #3B1E54;
+    font-family: 'Georgia', serif; /* Classic font for a more formal feel */
+    transition: color 0.3s ease;
+}
+
+.section p {
+    font-size: 1.3em;
+    color: #333;
+    line-height: 1.6;
+    max-width: 800px;
+    margin: 0 auto;
+    transition: color 0.3s ease;
+}
+
+thead th {
+    background-color: #00BAFF;
+    color: white;
+    padding: 10px;
+    text-transform: uppercase;
+    border: 1px solid black; /* Black border for header cells */
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse; /* Ensures borders collapse together */
+    border-spacing: 0; /* Removes any space between cells */
+    margin-top: 10px;
+    text-align: left;
+    font-size: 14px;
+    border: 2px solid black; /* Black border around the table */
+}
+
+/* Styling table rows */
+tbody tr {
+    border: 1px solid black; /* Black border for rows */
+    background-color: #f9f9f9;
+}
+
+tbody tr:nth-child(even) {
+    background-color: #eeeeee;
+}
+
+/* Styling table cells */
+td {
+    padding: 8px 10px;
+    border: 1px solid black; /* Black border for cells */
+}
+
+/* Styling the empty message row */
+tbody tr td[colspan="9"] {
+    text-align: center;
+    font-style: italic;
+    color: #666;
+}
+
+/* Adding hover effect on rows */
+tbody tr:hover {
+    background-color: #d3e8ff;
+}
+
+/* Button Styles */
+.btn {
+    display: inline-block;
+    background-color: #2563EB;
+    color: #fff;
+    padding: 12px 24px;
+    text-decoration: none;
+    border-radius: 5px;
+    margin-top: 10px;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+.btn:hover {
+    background-color: #CB9DF0;
+    transform: scale(1.05); /* Hover effect */
+}

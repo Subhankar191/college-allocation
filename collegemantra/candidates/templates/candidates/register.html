@@ -1,194 +1,123 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Student Signup</title>
-    <style>
-        /* Base styling */
-body {
-    font-family: Arial, sans-serif;
-    background-color: #f4f4f4;
-    margin: 0;
-    padding: 0;
-}
+{% extends 'candidates/base.html' %}
+{% load static %}
 
-/* Container Styling */
-.container {
-    width: 90%;
-    max-width: 500px;
-    margin: 50px auto;
-    padding: 40px;
-    background: #fff;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    border-radius: 8px;
-    text-align: center;
-}
+{% block title %}Candidate Registration{% endblock %}
 
-/* Header Styling */
-h2 {
-    color: #333;
-    margin-bottom: 20px;
-    font-size: 24px;
-}
+{% block content %}
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        background-color: #f4f4f4;
+        margin: 0;
+        padding: 0;
+    }
 
-/* Input Fields Styling */
-input, select, button {
-    width: 100%;
-    padding: 12px;
-    margin: 10px 0;
-    border-radius: 4px;
-    font-size: 16px;
-    box-sizing: border-box;
-}
-
-/* Input Fields */
-input {
-    border: 1px solid #ccc;
-}
-
-/* Button Styling */
-button[type="submit"] {
-    background-color: #4CAF50;
-    color: white;
-    font-size: 16px;
-    border: none;
-    cursor: pointer;
-}
-
-button[type="submit"]:hover {
-    background-color: #45a049;
-}
-
-/* Responsive Design */
-
-/* Mobile Devices (up to 480px) */
-@media (max-width: 480px) {
     .container {
         width: 90%;
-        padding: 20px;
+        max-width: 500px;
+        margin: 50px auto;
+        padding: 40px;
+        background: #fff;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        border-radius: 8px;
+        text-align: center;
     }
 
     h2 {
-        font-size: 20px;
-    }
-
-    input, select, button {
-        padding: 10px;
-        font-size: 14px;
-    }
-
-    button[type="submit"] {
-        padding: 12px;
-        font-size: 14px;
-    }
-
-    p {
-        font-size: 14px;
-    }
-}
-
-/* Tablets (481px to 768px) */
-@media (min-width: 481px) and (max-width: 768px) {
-    .container {
-        width: 85%;
-    }
-
-    h2 {
-        font-size: 22px;
-    }
-
-    input, select, button {
-        padding: 12px;
-        font-size: 16px;
-    }
-
-    button[type="submit"] {
-        padding: 14px;
-        font-size: 16px;
-    }
-}
-
-/* Laptops (769px to 1024px) */
-@media (min-width: 769px) and (max-width: 1024px) {
-    .container {
-        width: 70%;
-        padding: 30px;
-    }
-
-    h2 {
+        color: #333;
+        margin-bottom: 20px;
         font-size: 24px;
     }
 
     input, select, button {
-        padding: 14px;
-        font-size: 18px;
+        width: 100%;
+        padding: 12px;
+        margin: 10px 0;
+        border-radius: 4px;
+        font-size: 16px;
+        box-sizing: border-box;
+    }
+
+    input {
+        border: 1px solid #ccc;
     }
 
     button[type="submit"] {
-        padding: 16px;
-        font-size: 18px;
-    }
-}
-
-/* Desktops (1025px and above) */
-@media (min-width: 1025px) {
-    .container {
-        width: 50%;
-        padding: 40px;
+        background-color: #4CAF50;
+        color: white;
+        font-size: 16px;
+        border: none;
+        cursor: pointer;
     }
 
-    h2 {
-        font-size: 26px;
+    button[type="submit"]:hover {
+        background-color: #45a049;
     }
 
-    input, select, button {
-        padding: 16px;
-        font-size: 20px;
-    }
+    @media (max-width: 480px) {
+        .container {
+            width: 90%;
+            padding: 20px;
+        }
 
-    button[type="submit"] {
-        padding: 18px;
-        font-size: 20px;
+        h2 {
+            font-size: 20px;
+        }
+
+        input, select, button {
+            padding: 10px;
+            font-size: 14px;
+        }
+
+        button[type="submit"] {
+            padding: 12px;
+            font-size: 14px;
+        }
     }
-}
-    </style>
-</head>
-<body>
+</style>
 
 <div class="container">
-    <h2>Student Details</h2>
-    <!-- Signup form -->
+    <h2>Candidate Registration</h2>
+
+    {% if messages %}
+    <ul class="messages">
+        {% for message in messages %}
+        <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+        {% endfor %}
+    </ul>
+    {% endif %}
+
     <form method="POST" action="{% url 'candidates:candidate_register' %}">
         {% csrf_token %}
         <input type="text" name="c_name" placeholder="Candidate Name" required>
-        <input type="number" name="roll_no" placeholder="Roll No" required>
-        <select name="gender"  required>
-            <option value="" disabled selected >Gender</option>
+        <input type="text" name="roll_no" placeholder="Roll No" required>
+
+        <select name="gender" required>
+            <option value="" disabled selected>Gender</option>
             <option value="Male">Male</option>
             <option value="Female">Female</option>
             <option value="Others">Others</option>
         </select>
-        <input type="date" name="dob" placeholder="Date of Birth" required>
+
+        <input type="date" name="dob" required>
         <input type="number" name="rank" placeholder="Candidate Rank" required>
         <input type="number" step="0.01" name="xii_percentage" placeholder="XII Percentage" required>
-       
-        <select name="category"  required>
-            <option value="" disabled selected >Category</option>
+
+        <select name="category" required>
+            <option value="" disabled selected>Category</option>
             <option value="General">General</option>
             <option value="EWS">EWS</option>
             <option value="OBC">OBC</option>
             <option value="SC">SC</option>
-            <option value="SC">ST</option>
-
+            <option value="ST">ST</option>
         </select>
+
         <input type="text" name="nationality" placeholder="Nationality" required>
         <input type="text" name="address" placeholder="Address" required>
         <input type="email" name="email" placeholder="Email" required>
         <input type="text" name="phone" placeholder="Phone" required>
+
         <button type="submit">Submit</button>
     </form>
 </div>
-
-</body>
-</html>
+{% endblock %}

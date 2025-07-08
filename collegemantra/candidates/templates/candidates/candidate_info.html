@@ -1,88 +1,102 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Candidate Information</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            background-color: #f4f6f9;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-            margin: 0;
+{% extends 'candidates/base.html' %}
+{% load static %}
+
+{% block title %}Candidate Information{% endblock %}
+
+{% block content %}
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        background-color: #f4f6f9;
+        margin: 0;
+        padding: 20px;
+    }
+
+    .info-container {
+        max-width: 1200px;
+        margin: auto;
+        overflow-x: auto;
+        background: #fff;
+        padding: 20px;
+        border-radius: 8px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    }
+
+    h1 {
+        color: #007BFF;
+        text-align: center;
+        margin-bottom: 20px;
+    }
+
+    table {
+        width: 100%;
+        border-collapse: collapse;
+        font-size: 14px;
+    }
+
+    th, td {
+        border: 1px solid #ddd;
+        padding: 12px;
+        text-align: left;
+    }
+
+    th {
+        background-color: #007BFF;
+        color: white;
+    }
+
+    td {
+        background-color: #f9f9f9;
+    }
+
+    @media (max-width: 768px) {
+        table, thead, tbody, th, td, tr {
+            font-size: 12px;
         }
-        table {
-            width: 100%;
-            border-collapse: collapse;
-            margin: 20px 0;
-            background-color: #fff;
-            border-radius: 8px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-        }
-        th, td {
-            border: 1px solid #ddd;
-            padding: 12px;
-            text-align: left;
-        }
-        th {
-            background-color: #007BFF;
-            color: white;
-        }
-        td {
-            background-color: #f9f9f9;
-        }
-        h1 {
-            color: #007BFF;
-            text-align: center;
-        }
-    </style>
-</head>
-<body>
-    <div>
-        <h1>Candidate Information</h1>
-        <table>
-            <thead>
-                <tr>
-                    <th>Username</th>
-                    <th>Roll Number</th>
-                    <th>Candidate Name</th>
-                    <th>Gender</th>
-                    <th>Date of Birth</th>
-                    <th>Rank</th>
-                    <th>XII Percentage</th>
-                    <th>Category</th>
-                    <th>Nationality</th>
-                    <th>Address</th>
-                    <th>Email</th>
-                    <th>Phone</th>
-                </tr>
-            </thead>
-            <tbody>
-                {% if candidate %}
-                    <tr>
-                        <td>{{ candidate.username }}</td>
-                        <td>{{ candidate.Roll_No }}</td>
-                        <td>{{ candidate.Candidate_Name }}</td>
-                        <td>{{ candidate.Gender }}</td>
-                        <td>{{ candidate.DOB }}</td>
-                        <td>{{ candidate.Candidate_Rank }}</td>
-                        <td>{{ candidate.XII_Percentage }}</td>
-                        <td>{{ candidate.Category }}</td>
-                        <td>{{ candidate.Nationality }}</td>
-                        <td>{{ candidate.Address }}</td>
-                        <td>{{ candidate.Email }}</td>
-                        <td>{{ candidate.Phone }}</td>
-                    </tr>
-                {% else %}
-                    <tr>
-                        <td colspan="12">No candidate information found.</td>
-                    </tr>
-                {% endif %}
-            </tbody>
-        </table>
-    </div>
-</body>
-</html>
+    }
+</style>
+
+<div class="info-container">
+    <h1>Candidate Information</h1>
+    <table>
+        <thead>
+            <tr>
+                <th>Username</th>
+                <th>Roll Number</th>
+                <th>Candidate Name</th>
+                <th>Gender</th>
+                <th>Date of Birth</th>
+                <th>Rank</th>
+                <th>XII %</th>
+                <th>Category</th>
+                <th>Nationality</th>
+                <th>Address</th>
+                <th>Email</th>
+                <th>Phone</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% if candidate %}
+            <tr>
+                <td>{{ candidate.username }}</td>
+                <td>{{ candidate.Roll_No }}</td>
+                <td>{{ candidate.Candidate_Name }}</td>
+                <td>{{ candidate.Gender }}</td>
+                <td>{{ candidate.DOB }}</td>
+                <td>{{ candidate.Candidate_Rank }}</td>
+                <td>{{ candidate.XII_Percentage }}</td>
+                <td>{{ candidate.Category }}</td>
+                <td>{{ candidate.Nationality }}</td>
+                <td>{{ candidate.Address }}</td>
+                <td>{{ candidate.Email }}</td>
+                <td>{{ candidate.Phone }}</td>
+            </tr>
+            {% else %}
+            <tr>
+                <td colspan="12" style="text-align:center;">No candidate information found.</td>
+            </tr>
+            {% endif %}
+        </tbody>
+    </table>
+</div>
+{% endblock %}

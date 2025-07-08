@@ -2,43 +2,75 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Login Page</title>
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
-  <link rel="stylesheet" href="{% static 'candidates/signup.css' %}">
-  <link href="https://fonts.googleapis.com/css2?family=Magnolia+Script&display=swap" rel="stylesheet">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <!-- External Styles & Fonts -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Magnolia+Script&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="{% static 'candidates/signup.css' %}" />
+
+  <style>
+    .messages {
+      list-style-type: none;
+      padding: 0;
+      margin: 10px auto;
+      max-width: 300px;
+      text-align: center;
+    }
+    .messages li {
+      padding: 10px;
+      margin-bottom: 5px;
+      border-radius: 4px;
+    }
+    .messages li.success { background-color: #d4edda; color: #155724; }
+    .messages li.error { background-color: #f8d7da; color: #721c24; }
+    .messages li.info { background-color: #d1ecf1; color: #0c5460; }
+    .messages li.warning { background-color: #fff3cd; color: #856404; }
+  </style>
 </head>
 <body>
+  <!-- Header Section -->
   <header>
     <div class="container_header">
-      <img src="{% static 'candidates/logo.jpg' %}" alt="College Mantra Logo" class="logo">
+      <img src="{% static 'candidates/logo.jpg' %}" alt="College Mantra Logo" class="logo" />
       <h1>COLLEGE <span>MANTRA</span></h1>
     </div>
-  </header> 
-    <div class="background">
-        <div class="shape"></div>
-        <div class="shape"></div>
-    </div>
-    {% if messages %}
+  </header>
+
+  <!-- Background Shapes -->
+  <div class="background">
+    <div class="shape"></div>
+    <div class="shape"></div>
+  </div>
+
+  <!-- Display Messages -->
+  {% if messages %}
     <ul class="messages">
-        {% for message in messages %}
-            <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
-        {% endfor %}
+      {% for message in messages %}
+        <li class="{{ message.tags }}">{{ message }}</li>
+      {% endfor %}
     </ul>
-{% endif %}
-<form method="POST" action="{% url 'candidates:candidate_login' %}">
+  {% endif %}
 
+  <!-- Login Form -->
+  <form method="POST" action="{% url 'candidates:candidate_login' %}">
     {% csrf_token %}
-        <h3>Login Here</h3>
-        <label for="username">Roll Number</label>
-        <input type="text" placeholder="Enter Roll Number" id="username" name="username" required>
+    <h3>Login Here</h3>
 
-        <label for="password">Password</label>
-        <input type="password" placeholder="Password" id="password" name="password" required>
+    <label for="username">Roll Number</label>
+    <input type="text" id="username" name="username" placeholder="Enter Roll Number" required />
 
-        <button type="submit">Log In</button>
+    <label for="password">Password</label>
+    <input type="password" id="password" name="password" placeholder="Password" required />
 
-        <a href="{% url 'candidates:candidate_signup' %}">Create an account</a>
-    </form>
+    <button type="submit">Log In</button>
+
+    <p style="text-align: center; margin-top: 10px;">
+      Don't have an account?
+      <a href="{% url 'candidates:candidate_signup' %}">Create one</a>
+    </p>
+  </form>
 </body>
 </html>
