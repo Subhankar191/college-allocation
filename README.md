@@ -56,12 +56,69 @@ Built Frontend using **HTML** ,**CSS** and **JavaScript**, Backend using **Djang
 | **PDF Gen.** | reportlab for generating offer letters     |
 | **Tools**    | MySQL Workbench          |
 
-
-
+---
+## 📁 Folder Structure
+```
+MINORPROJECT/
+├── collegemantra/
+│ ├── init.py
+│ ├── asgi.py
+│ ├── settings.py
+│ ├── urls.py
+│ ├── wsgi.py
+│
+├── candidates/
+│ ├── pycache/
+│ ├── management/
+│ ├── migrations/
+│ ├── static/
+│ ├── templates/
+│ ├── init.py
+│ ├── admin.py
+│ ├── apps.py
+│ ├── models.py
+│ ├── tests.py
+│ ├── urls.py
+│ ├── views.py
+│
+├── colleges/
+│ ├── pycache/
+│ ├── migrations/
+│ ├── static/
+│ ├── templates/
+│ ├── init.py
+│ ├── admin.py
+│ ├── apps.py
+│ ├── models.py
+│ ├── tests.py
+│ ├── urls.py
+│ ├── views.py
+│
+├── users/
+│ ├── pycache/
+│ ├── migrations/
+│ ├── static/
+│ ├── templates/
+│ ├── init.py
+│ ├── admin.py
+│ ├── apps.py
+│ ├── models.py
+│ ├── tests.py
+│ ├── urls.py
+│ ├── views.py
+│
+├── screenshots/
+│
+├── db.sqlite3
+├── manage.py
+├── README.md
+├── Optimized SQL Schema for College_Mantra Database
+```
+---
 
 ## 🧪 Setup Instructions
 
 1. **Clone the repo**
    ```bash
-   git clone https://github.com/Subhankar191/college_allocation.git
+   git clone https://github.com/Subhankar191/college-allocation.git
    cd college_allocation
