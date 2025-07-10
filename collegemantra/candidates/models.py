@@ -3,7 +3,6 @@ from django.db import models
 
 class Candidate(models.Model):
     username = models.CharField(max_length=150, primary_key=True)
-    Phone = models.CharField(max_length=15)
     Roll_No = models.CharField(max_length=15, unique=True)
     Candidate_Name = models.CharField(max_length=255)
     Gender = models.CharField(max_length=15)
@@ -14,6 +13,7 @@ class Candidate(models.Model):
     Nationality = models.CharField(max_length=15)
     Address = models.CharField(max_length=255)
     Email = models.EmailField()
+    Phone = models.CharField(max_length=15)
 
     def __str__(self):
         return str(self.Roll_No)
