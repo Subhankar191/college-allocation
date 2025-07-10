@@ -33,11 +33,18 @@ Built Frontend using **HTML** ,**CSS** and **JavaScript**, Backend using **Djang
 
 ## ✨ Features
 
-- User registration & login system
-- Submit and rank preferred colleges
-- Admin panel to manage seat allocation
-- Automated seat allotment based on rank and preferences
-- Responsive UI with clean design
+- 📝 **Candidate Registration** - Users can register with their details and create an account securely.
+- 🔐 **User Authentication** - Login and session management for candidates to access their dashboard.
+- 🧑‍💼 **Submit Own Details** - Candidates can fill in their personal information, academic scores, and category details required for the admission process.
+- 📋 **Preference Filling** - Candidates can select and rank colleges and courses based on their choices.
+- 🧮 **Automated Seat Allocation** - System allocates seats using a reservation-aware algorithm with category and rank-based logic.
+- 🎯 **Real-time Allocation View** - Candidates can view their allocated college and course after the allocation round.
+- 💳 **Secure Payment Gateway** - Candidates can confirm their seat by completing payment and checking payment status.
+- 📄 **Offer Letter Download** - After successful payment, candidates can download a PDF offer letter containing allocation details.
+- 🏛️ **Admin-Defined College & Course Data** - System supports dynamic management of colleges, courses, and seat matrices by admins.
+- 🗃️ **MySQL Integration with Triggers & Procedures** - Backend built with normalized MySQL schema, triggers for seat updates, and a robust seat allocation procedure.
+
+---
 
 ## 🛠️ Built With
 
