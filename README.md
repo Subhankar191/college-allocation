@@ -1,4 +1,4 @@
-# 🎓College Mantra - College Allocatin Platform
+# 🎓College Mantra - College Allocation Platform
 
 A web-based College Allocation System that streamlines and automates the college admission process based on student **preferences**, **catagory**, **rank**, and **seat availability**.
 
