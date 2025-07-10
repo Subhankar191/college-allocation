@@ -21,7 +21,7 @@ A web-based College Allocation System that streamlines and automates the college
 
 > _Add screenshots here to showcase your UI_  
 > Example:
-> ![Homepage](screenshots/homepage.png)
+> ![Homepage](screenshots/Screenshot_1.png)
 
 ## 🧪 Setup Instructions
 
