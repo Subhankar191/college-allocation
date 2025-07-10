@@ -19,8 +19,11 @@ A web-based College Allocation System that streamlines and automates the college
 
 ## 📸 Screenshots
 
-> ![Homepage](screenshots/Screenshot_1.png)
-> ![Prefrencepage](screenshots/Screenshot_2.png)
+> ![Home page](screenshots/Screenshot_1.png)
+> ![Prefrence page](screenshots/Screenshot_2.png)
+> ![Allocation page](screenshots/Screenshot_3.png)
+> ![Payment page](screenshots/Screenshot_4.png)
+> ![Payment Confirm and download Offer Letter page](screenshots/Screenshot_5.png)
 
 ## 🧪 Setup Instructions
 
