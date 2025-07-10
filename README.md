@@ -50,11 +50,11 @@ Built Frontend using **HTML** ,**CSS** and **JavaScript**, Backend using **Djang
 
 | Layer        | Technology / Tools                                                                 |
 |--------------|-------------------------------------------------------------------------------------|
-| **Frontend** | HTML5, CSS3, JavaScript, Bootstrap 5 / Tailwind CSS, Responsive Design             |
-| **Backend**  | Python 3, Django Framework (MVC), Raw SQL, MySQL Stored Procedures                 |
+| **Frontend** | HTML, CSS, JavaScript             |
+| **Backend**  | Python, Django Framework (MVC), Raw SQL, MySQL Stored Procedures                 |
 | **Database** | MySQL — Normalized Schema, Triggers, `AllocateSeats()` Stored Procedure            |
-| **PDF Gen.** | reportlab (`from reportlab.pdfgen import canvas`) for generating offer letters     |
-| **Tools**    | Git, GitHub, MySQL Workbench, VS Code, Postman (optional for API testing)          |
+| **PDF Gen.** | reportlab for generating offer letters     |
+| **Tools**    | MySQL Workbench          |
 
 
 
